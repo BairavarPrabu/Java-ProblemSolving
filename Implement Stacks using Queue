@@ -1,0 +1,57 @@
+class MyStack {
+    private Queue<Integer> input;
+    private Queue<Integer> output;
+
+    public MyStack() {
+        input = new LinkedList<>();
+        output = new LinkedList<>();
+    }
+
+    // Push element x onto stack.
+    public void push(int x) {
+        input.add(x);
+    }
+
+    // Removes the element on top of the stack and returns that element.
+    public int pop() {
+        while (input.size() > 1) {
+            output.add(input.poll());
+        }
+        int top = input.poll(); // last element
+        swapQueues();
+        return top;
+    }
+
+    // Get the top element.
+    public int top() {
+        while (input.size() > 1) {
+            output.add(input.poll());
+        }
+        int top = input.poll();
+        output.add(top); // put it back since it's a top() call
+        swapQueues();
+        return top;
+    }
+
+    // Returns whether the stack is empty.
+    public boolean empty() {
+        return input.isEmpty() && output.isEmpty();
+    }
+
+    // Additional method: checks if the stack contains an element
+    public boolean contains(int x) {
+        return input.contains(x) || output.contains(x);
+    }
+
+    // Additional method: checks if the stack has exactly one element
+    public boolean isSingleElement() {
+        return (input.size() + output.size()) == 1;
+    }
+
+    // Swap input and output queues
+    private void swapQueues() {
+        Queue<Integer> temp = input;
+        input = output;
+        output = temp;
+    }
+}
