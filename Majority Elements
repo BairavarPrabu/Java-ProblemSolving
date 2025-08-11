@@ -1,0 +1,18 @@
+class Solution {
+    public int majorityElement(int[] nums) {
+        int k = nums.length / 2;
+
+        Map<Integer, Integer> frequency = new HashMap<>();
+        for (int num : nums) {
+            frequency.put(num, frequency.getOrDefault(num, 0) + 1);
+        }
+
+        for (Map.Entry<Integer, Integer> entry : frequency.entrySet()) {
+            System.out.println(entry.getKey() + " occurs " + entry.getValue() + " time(s)");
+            if (entry.getValue() > k) {
+                return entry.getKey();
+            }
+        }
+        return -1; 
+    }
+}
